@@ -21,10 +21,17 @@ router.get('/', (req, res, next) => {
 router.get('/:productId', (req, res, next) => {
     const id = req.params.productId;
     Product.findById(id)
+        .select('name price _id')
         .exec()
         .then(doc => {
             console.log("From database", doc);
-            res.status(200).json(doc);
+            res.status(200).json({
+                product: doc,
+                request: {
+                    type: 'Get all products',
+                    url: 'http://localhost:3000/product'
+                }
+            });
         })
         .catch(err => {
             console.log(err);
