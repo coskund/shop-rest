@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 
 const routeProduct = require('./api/routes/product');
 const routeOrder = require('./api/routes/order');
+const userOrder = require('./api/routes/user');
 
 const MONGO_URI = 'mongodb://localhost:27017/shop-api';
 
@@ -33,6 +34,7 @@ app.use((req, res, next) => {
 
 app.use('/product', routeProduct);
 app.use('/order', routeOrder);
+app.use('/user', userOrder);
 
 app.use((req, res, next) => {
     const error = new Error("Not Found");
