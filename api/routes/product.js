@@ -85,7 +85,7 @@ router.post('/', checkAuth, upload.single('productImage'), (req, res, next) => {
     });
 })
 
-router.patch("/:productId", (req, res, next) => {
+router.patch("/:productId", checkAuth, (req, res, next) => {
     const id = req.params.productId
     const updateOps = {};
     for (const ops of req.body) {
@@ -105,7 +105,7 @@ router.patch("/:productId", (req, res, next) => {
         })
 })
 
-router.delete('/:productId', (req, res, next) => {
+router.delete('/:productId', checkAuth, (req, res, next) => {
     const id = req.params.productId;
     Product.deleteOne({ _id: id })
         .exec()
